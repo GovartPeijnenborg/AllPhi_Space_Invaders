@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     }
     public void OnDifficultyChanged()
     {
-        Difficulty = 
+    
     }
     public void OnQuitButton() 
     {
