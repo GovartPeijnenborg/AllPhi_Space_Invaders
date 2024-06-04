@@ -15,7 +15,7 @@ public class Invaders : MonoBehaviour
 
     [Header("Missiles")]
     public Projectile missilePrefab;
-    public float missileSpawnRate = 1f;
+    public float missileSpawnRate = 0.1f;
 
     private void Awake()
     {
@@ -78,7 +78,11 @@ public class Invaders : MonoBehaviour
 
     private void Update()
     {
-  
+        MovementInvaders();
+    }
+
+    private void MovementInvaders()
+    {
         int totalCount = rows * columns;
         int amountAlive = GetAliveCount();
         int amountKilled = totalCount - amountAlive;
@@ -95,7 +99,8 @@ public class Invaders : MonoBehaviour
         foreach (Transform invader in transform)
         {
 
-            if (!invader.gameObject.activeInHierarchy) {
+            if (!invader.gameObject.activeInHierarchy)
+            {
                 continue;
             }
 
