@@ -4,17 +4,17 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Bunker : MonoBehaviour
 {
-    public Texture2D splat;
+    public Texture2D Splat;
 
-    private Texture2D originalTexture;
-    private SpriteRenderer spriteRenderer;
-    private new BoxCollider2D collider;
+    private Texture2D _originalTexture;
+    private SpriteRenderer _spriteRenderer;
+    private BoxCollider2D _collider;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        collider = GetComponent<BoxCollider2D>();
-        originalTexture = spriteRenderer.sprite.texture;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _collider = GetComponent<BoxCollider2D>();
+        _originalTexture = _spriteRenderer.sprite.texture;
 
         ResetBunker();
     }
@@ -22,7 +22,7 @@ public class Bunker : MonoBehaviour
     public void ResetBunker()
     {
 
-        CopyTexture(originalTexture);
+        CopyTexture(_originalTexture);
 
         gameObject.SetActive(true);
     }
@@ -39,42 +39,42 @@ public class Bunker : MonoBehaviour
         copy.SetPixels32(source.GetPixels32());
         copy.Apply();
 
-        Sprite sprite = Sprite.Create(copy, spriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f), spriteRenderer.sprite.pixelsPerUnit);
-        spriteRenderer.sprite = sprite;
+        Sprite sprite = Sprite.Create(copy, _spriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f), _spriteRenderer.sprite.pixelsPerUnit);
+        _spriteRenderer.sprite = sprite;
     }
 
     public bool CheckCollision(BoxCollider2D other, Vector3 hitPoint)
     {
         Vector2 offset = other.size / 2;
-        return Splat(hitPoint) ||
-               Splat(hitPoint + (Vector3.down * offset.y)) ||
-               Splat(hitPoint + (Vector3.up * offset.y)) ||
-               Splat(hitPoint + (Vector3.left * offset.x)) ||
-               Splat(hitPoint + (Vector3.right * offset.x));
+        return Hit(hitPoint) ||
+               Hit(hitPoint + (Vector3.down * offset.y)) ||
+               Hit(hitPoint + (Vector3.up * offset.y)) ||
+               Hit(hitPoint + (Vector3.left * offset.x)) ||
+               Hit(hitPoint + (Vector3.right * offset.x));
     }
 
-    private bool Splat(Vector3 hitPoint)
+    private bool Hit(Vector3 hitPoint)
     {
 
         if (!CheckPoint(hitPoint, out int px, out int py)) {
             return false;
         }
 
-        Texture2D texture = spriteRenderer.sprite.texture;
+        Texture2D texture = _spriteRenderer.sprite.texture;
 
-        px -= splat.width / 2;
-        py -= splat.height / 2;
+        px -= Splat.width / 2;
+        py -= Splat.height / 2;
 
         int startX = px;
 
-        for (int y = 0; y < splat.height; y++)
+        for (int y = 0; y < Splat.height; y++)
         {
             px = startX;
 
-            for (int x = 0; x < splat.width; x++)
+            for (int x = 0; x < Splat.width; x++)
             {
                 Color pixel = texture.GetPixel(px, py);
-                pixel.a *= splat.GetPixel(x, y).a;
+                pixel.a *= Splat.GetPixel(x, y).a;
                 texture.SetPixel(px, py, pixel);
                 px++;
             }
@@ -91,13 +91,13 @@ public class Bunker : MonoBehaviour
     {
         Vector3 localPoint = transform.InverseTransformPoint(hitPoint);
 
-        localPoint.x += collider.size.x / 2;
-        localPoint.y += collider.size.y / 2;
+        localPoint.x += _collider.size.x / 2;
+        localPoint.y += _collider.size.y / 2;
 
-        Texture2D texture = spriteRenderer.sprite.texture;
+        Texture2D texture = _spriteRenderer.sprite.texture;
 
-        px = (int)(localPoint.x / collider.size.x * texture.width);
-        py = (int)(localPoint.y / collider.size.y * texture.height);
+        px = (int)(localPoint.x / _collider.size.x * texture.width);
+        py = (int)(localPoint.y / _collider.size.y * texture.height);
 
         return texture.GetPixel(px, py).a != 0f;
     }

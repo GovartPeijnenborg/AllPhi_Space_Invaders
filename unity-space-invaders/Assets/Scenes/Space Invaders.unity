@@ -246,9 +246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459f605e13eced949a32904be2fa0a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverUI: {fileID: 797358150}
-  scoreText: {fileID: 1984502043}
-  livesText: {fileID: 188796889}
+  _gameOverUI: {fileID: 797358150}
+  _scoreText: {fileID: 1984502043}
+  _livesText: {fileID: 188796889}
 --- !u!1 &469048591
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0e2aa51f6856346b69542eb2a5f8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splat: {fileID: 2800000, guid: a6a2d27059997af43b0160ed934f4eb2, type: 3}
+  Splat: {fileID: 2800000, guid: a6a2d27059997af43b0160ed934f4eb2, type: 3}
 --- !u!1 &797358150
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,40 +724,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df26ec918b6dca34dbfb862f22570b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
+  Prefabs:
   - {fileID: 2191486796875677341, guid: 21f865cb325c39a42ae05fa853c24160, type: 3}
   - {fileID: 2191486796875677341, guid: 21f865cb325c39a42ae05fa853c24160, type: 3}
   - {fileID: 8540571529431895508, guid: 92725eb3a0283d641835e37afa65bda1, type: 3}
   - {fileID: 8540571529431895508, guid: 92725eb3a0283d641835e37afa65bda1, type: 3}
   - {fileID: 2151206084973411176, guid: 4a81c84ee7dea6d49a91f3fc916f3543, type: 3}
-  speed:
+  Speed:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.25
+      value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 8
-      inSlope: 21.726612
-      outSlope: 21.726612
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.01853013
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rows: 5
-  columns: 11
-  missilePrefab: {fileID: 6161936928069685931, guid: 3c328e673b90a7f418f1f1e66f83522b, type: 3}
-  missileSpawnRate: 1
+  Rows: 5
+  Columns: 11
+  MissilePrefab: {fileID: 6161936928069685931, guid: 3c328e673b90a7f418f1f1e66f83522b, type: 3}
+  MissileSpawnRate: 0.5
 --- !u!1 &1001845995
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0e2aa51f6856346b69542eb2a5f8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splat: {fileID: 2800000, guid: a6a2d27059997af43b0160ed934f4eb2, type: 3}
+  Splat: {fileID: 2800000, guid: a6a2d27059997af43b0160ed934f4eb2, type: 3}
 --- !u!1 &1154390489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,9 +1000,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4508da8755a834b85393bfa1b44963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  cycleTime: 30
-  score: 300
+  Speed: 5
+  CycleTime: 30
+  Score: 300
 --- !u!61 &1154390493
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1450,7 +1450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0e2aa51f6856346b69542eb2a5f8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splat: {fileID: 2800000, guid: a6a2d27059997af43b0160ed934f4eb2, type: 3}
+  Splat: {fileID: 2800000, guid: a6a2d27059997af43b0160ed934f4eb2, type: 3}
 --- !u!1 &1639391297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,8 +1622,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57279fa70d552234492ebb5dade22177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  laserPrefab: {fileID: 33052392596605686, guid: 8cca1da190961a842b34231aade647ef, type: 3}
+  Speed: 5
+  LaserPrefab: {fileID: 33052392596605686, guid: 8cca1da190961a842b34231aade647ef, type: 3}
 --- !u!1 &1660341574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,7 +1767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0e2aa51f6856346b69542eb2a5f8d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splat: {fileID: 2800000, guid: a6a2d27059997af43b0160ed934f4eb2, type: 3}
+  Splat: {fileID: 2800000, guid: a6a2d27059997af43b0160ed934f4eb2, type: 3}
 --- !u!1 &1984502041
 GameObject:
   m_ObjectHideFlags: 0

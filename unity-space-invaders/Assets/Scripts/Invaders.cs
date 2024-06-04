@@ -3,41 +3,41 @@ using UnityEngine;
 public class Invaders : MonoBehaviour
 {
     [Header("Invaders")]
-    public Invader[] prefabs = new Invader[5];
-    public AnimationCurve speed = new AnimationCurve();
+    public Invader[] Prefabs = new Invader[5];
+    public AnimationCurve Speed = new AnimationCurve();
 
-    private Vector3 direction = Vector3.right;
-    private Vector3 initialPosition;
+    private Vector3 _direction = Vector3.right;
+    private Vector3 _initialPosition;
 
     [Header("Grid")]
-    public int rows = 5;
-    public int columns = 11;
+    public int Rows = 5;
+    public int Columns = 11;
 
     [Header("Missiles")]
-    public Projectile missilePrefab;
-    public float missileSpawnRate = 0.1f;
+    public Projectile MissilePrefab;
+    public float MissileSpawnRate = 0.5f;
 
     private void Awake()
     {
-        initialPosition = transform.position;
+        _initialPosition = transform.position;
 
         CreateInvaderGrid();
     }
 
     private void CreateInvaderGrid()
     {
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < Rows; i++)
         {
-            float width = 2f * (columns - 1);
-            float height = 2f * (rows - 1);
+            float width = 2f * (Columns - 1);
+            float height = 2f * (Rows - 1);
 
             Vector2 centerOffset = new Vector2(-width * 0.5f, -height * 0.5f);
             Vector3 rowPosition = new Vector3(centerOffset.x, (2f * i) + centerOffset.y, 0f);
 
-            for (int j = 0; j < columns; j++)
+            for (int j = 0; j < Columns; j++)
             {
 
-                Invader invader = Instantiate(prefabs[i], transform);
+                Invader invader = Instantiate(Prefabs[i], transform);
 
 
                 Vector3 position = rowPosition;
@@ -49,7 +49,7 @@ public class Invaders : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(MissileAttack), missileSpawnRate, missileSpawnRate);
+        InvokeRepeating(nameof(MissileAttack), MissileSpawnRate, MissileSpawnRate);
     }
 
     private void MissileAttack()
@@ -70,7 +70,7 @@ public class Invaders : MonoBehaviour
            
             if (Random.value < (1f / amountAlive))
             {
-                Instantiate(missilePrefab, invader.position, Quaternion.identity);
+                Instantiate(MissilePrefab, invader.position, Quaternion.identity);
                 break;
             }
         }
@@ -83,14 +83,14 @@ public class Invaders : MonoBehaviour
 
     private void MovementInvaders()
     {
-        int totalCount = rows * columns;
+        int totalCount = Rows * Columns;
         int amountAlive = GetAliveCount();
         int amountKilled = totalCount - amountAlive;
         float percentKilled = (float)amountKilled / (float)totalCount;
 
 
-        float speed = this.speed.Evaluate(percentKilled);
-        transform.position += speed * Time.deltaTime * direction;
+        float speed = this.Speed.Evaluate(percentKilled) + 0.1f;
+        transform.position += speed * Time.deltaTime * _direction;
 
 
         Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
@@ -105,12 +105,12 @@ public class Invaders : MonoBehaviour
             }
 
 
-            if (direction == Vector3.right && invader.position.x >= (rightEdge.x - 1f))
+            if (_direction == Vector3.right && invader.position.x >= (rightEdge.x - 1f))
             {
                 AdvanceRow();
                 break;
             }
-            else if (direction == Vector3.left && invader.position.x <= (leftEdge.x + 1f))
+            else if (_direction == Vector3.left && invader.position.x <= (leftEdge.x + 1f))
             {
                 AdvanceRow();
                 break;
@@ -121,7 +121,7 @@ public class Invaders : MonoBehaviour
     private void AdvanceRow()
     {
 
-        direction = new Vector3(-direction.x, 0f, 0f);
+        _direction = new Vector3(-_direction.x, 0f, 0f);
 
 
         Vector3 position = transform.position;
@@ -131,8 +131,8 @@ public class Invaders : MonoBehaviour
 
     public void ResetInvaders()
     {
-        direction = Vector3.right;
-        transform.position = initialPosition;
+        _direction = Vector3.right;
+        transform.position = _initialPosition;
 
         foreach (Transform invader in transform) {
             invader.gameObject.SetActive(true);

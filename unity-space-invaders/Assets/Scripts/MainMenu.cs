@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public int Difficulty;
     public void OnPlayButton()
     {
         SceneManager.LoadScene(1);

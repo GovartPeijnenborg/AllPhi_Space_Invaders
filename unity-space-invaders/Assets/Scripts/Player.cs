@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Player : MonoBehaviour
 {
-    public float speed = 5f;
-    public Projectile laserPrefab;
+    public float Speed = 5f;
+    public Projectile LaserPrefab;
 
-    private Projectile laser;
+    private Projectile _laser;
 
     private void Update()
     {
@@ -31,11 +31,11 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            position.x -= speed * Time.deltaTime;
+            position.x -= Speed * Time.deltaTime;
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            position.x += speed * Time.deltaTime;
+            position.x += Speed * Time.deltaTime;
         }
 
         position = CheckCollisionWithBoundary(position);
@@ -54,9 +54,9 @@ public class Player : MonoBehaviour
 
     private void Shoot()
     {
-        if (laser == null && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
+        if (_laser == null && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)))
         {
-            laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+            _laser = Instantiate(LaserPrefab, transform.position, Quaternion.identity);
         }
     }
 

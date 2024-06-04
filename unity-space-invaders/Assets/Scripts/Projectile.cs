@@ -7,11 +7,11 @@ public class Projectile : MonoBehaviour
     public Vector3 direction = Vector3.up;
     public float speed = 20f;
 
-    private new BoxCollider2D collider;
+    private BoxCollider2D _collider;
 
     private void Awake()
     {
-        collider = GetComponent<BoxCollider2D>();
+        _collider = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
     {
         Bunker bunker = other.gameObject.GetComponent<Bunker>();
 
-        if (bunker == null || bunker.CheckCollision(collider, transform.position)) {
+        if (bunker == null || bunker.CheckCollision(_collider, transform.position)) {
             Destroy(gameObject);
         }
     }

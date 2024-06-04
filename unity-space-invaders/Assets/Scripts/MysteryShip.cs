@@ -3,14 +3,14 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class MysteryShip : MonoBehaviour
 {
-    public float speed = 5f;
-    public float cycleTime = 30f;
-    public int score = 300;
+    public float Speed = 5f;
+    public float CycleTime = 30f;
+    public int Score = 300;
 
-    private Vector2 leftDestination;
-    private Vector2 rightDestination;
-    private int direction = -1;
-    private bool spawned;
+    private Vector2 _leftDestination;
+    private Vector2 _rightDestination;
+    private int _direction = -1;
+    private bool _spawned;
 
     private void Start()
     {
@@ -18,19 +18,19 @@ public class MysteryShip : MonoBehaviour
         Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
         Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
 
-        leftDestination = new Vector2(leftEdge.x - 1f, transform.position.y);
-        rightDestination = new Vector2(rightEdge.x + 1f, transform.position.y);
+        _leftDestination = new Vector2(leftEdge.x - 1f, transform.position.y);
+        _rightDestination = new Vector2(rightEdge.x + 1f, transform.position.y);
 
         Despawn();
     }
 
     private void Update()
     {
-        if (!spawned) {
+        if (!_spawned) {
             return;
         }
 
-        if (direction == 1) {
+        if (_direction == 1) {
             MoveRight();
         } else {
             MoveLeft();
@@ -39,46 +39,46 @@ public class MysteryShip : MonoBehaviour
 
     private void MoveRight()
     {
-        transform.position += Vector3.right * speed * Time.deltaTime;
+        transform.position += Vector3.right * Speed * Time.deltaTime;
 
-        if (transform.position.x >= rightDestination.x) {
+        if (transform.position.x >= _rightDestination.x) {
             Despawn();
         }
     }
 
     private void MoveLeft()
     {
-        transform.position += Vector3.left * speed * Time.deltaTime;
+        transform.position += Vector3.left * Speed * Time.deltaTime;
 
-        if (transform.position.x <= leftDestination.x) {
+        if (transform.position.x <= _leftDestination.x) {
             Despawn();
         }
     }
 
     private void Spawn()
     {
-        direction *= -1;
+        _direction *= -1;
 
-        if (direction == 1) {
-            transform.position = leftDestination;
+        if (_direction == 1) {
+            transform.position = _leftDestination;
         } else {
-            transform.position = rightDestination;
+            transform.position = _rightDestination;
         }
 
-        spawned = true;
+        _spawned = true;
     }
 
     private void Despawn()
     {
-        spawned = false;
+        _spawned = false;
 
-        if (direction == 1) {
-            transform.position = rightDestination;
+        if (_direction == 1) {
+            transform.position = _rightDestination;
         } else {
-            transform.position = leftDestination;
+            transform.position = _leftDestination;
         }
 
-        Invoke(nameof(Spawn), cycleTime);
+        Invoke(nameof(Spawn), CycleTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
