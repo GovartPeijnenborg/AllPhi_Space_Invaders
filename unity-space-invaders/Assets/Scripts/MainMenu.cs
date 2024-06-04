@@ -10,10 +10,7 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-    public void OnDifficultyChanged()
-    {
-    
-    }
+
     public void OnQuitButton() 
     {
         Application.Quit();
