@@ -6,5 +6,5 @@ This project was made in unity 2022.3.23f1 and is a replica of Space Invaders ma
 3.  Make sure the workload "Game development with Unity" is installed on Visual Studio.
 # Getting started playing the game
 These files will be kept up to date every push.
-1.  The game files are in the map Space Invader game files.
+1.  The game files are in the map Space Invader game file.
 2.  Run the file named Space Invaders.
